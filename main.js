@@ -104,3 +104,36 @@ for(let i = 0; i<discountedBooks.length; i++){
 
     
 
+// Creare un array (authors) che contiene gli autori dei libri.
+// Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
+// Ordina l’array authors in base all’età, senza creare un nuovo array.
+// (se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
+
+const authors = []
+let areAuthorsAdults = true;
+let etaAuthor = [];
+
+console.log(books[0].author.name);
+
+for (let i = 0; i < books.length; i++) {
+    const element = books[i].author;
+authors.push({ name: element.name, age: element.age });    
+console.log(authors);
+        
+    // etaAuthor.push(element.author.age);
+    // console.log(etaAuthor);
+    
+    if(element.age < 18){
+        areAuthorsAdults = false;
+    } 
+}
+
+if (areAuthorsAdults) { 
+    authors.sort((a, b) => a.age - b.age); 
+} else { 
+    authors.sort((a, b) => b.age - a.age); 
+} 
+console.log(authors); 
+console.log("Tutti maggiorenni?", areAuthorsAdults);
+
+
