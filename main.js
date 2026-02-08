@@ -117,8 +117,11 @@ console.log(books[0].author.name);
 
 for (let i = 0; i < books.length; i++) {
     const element = books[i].author;
-authors.push({ name: element.name, age: element.age });    
-console.log(authors);
+    authors.push({ 
+        name: element.name, 
+        age: element.age 
+    });    
+    console.log(authors);
         
     // etaAuthor.push(element.author.age);
     // console.log(etaAuthor);
@@ -137,3 +140,20 @@ console.log(authors);
 console.log("Tutti maggiorenni?", areAuthorsAdults);
 
 
+// Creare un array (ages) che contiene le età degli autori dei libri.
+// Calcola la somma delle età (agesSum) usando reduce.
+// Stampa in console l’età media degli autori dei libri.
+
+const ages = [];
+
+for (let i = 0; i<books.length; i++){
+    const elem = books[i].author;
+    ages.push(elem.age);
+    console.log(ages);
+    
+}
+
+const somma = ages.reduce((acc, curr)=>{
+    return acc+curr
+},0)
+console.log(somma);
