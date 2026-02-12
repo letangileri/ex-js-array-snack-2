@@ -86,7 +86,7 @@ for (let i = 0; i < books.length; i++) {
         availableBooks.push(objBook);
         console.log(availableBooks);
         
-        const rawPrice = parseFloat(objBook.price.replace('€', '')); 
+        const rawPrice = objBook.price.replace('€', ''); 
         const price = Number(rawPrice);
         const discounted = (price * .8).toFixed(2);
 
