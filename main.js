@@ -45,12 +45,10 @@ const books = [
   },
 ];
 
-// Crea una funzione che somma due numeri.
 // Crea un array (longBooks) con i libri che hanno più di 300 pagine;
 // Creare un array (longBooksTitles) che contiene solo i titoli dei libri contenuti in longBooks.
 // Stampa in console ogni titolo nella console.
 
-function Somma(n1, n2){
     const longBooks = [];
     const longBooksTitles = [];
 
@@ -67,8 +65,12 @@ function Somma(n1, n2){
         longBooksTitles.push(objLongBook.title);
         console.log(longBooksTitles);
     }
-}
-Somma(1,2);
+
+const longBooks2 = books.filter(b => b.pages > 300);
+const longBooksTitles2 = longBooks2.map(lb => lb.title);
+console.log(longBooksTitles2);
+longBooksTitles2.forEach(lbt => console.log(lbt))
+
 
 // Creare un array (availableBooks) che contiene tutti i libri disponibili.
 // Crea un array (discountedBooks) con gli availableBooks, ciascuno con il prezzo scontato del 20% (mantieni lo stesso formato e arrotonda al centesimo)
@@ -84,9 +86,9 @@ for (let i = 0; i < books.length; i++) {
         availableBooks.push(objBook);
         console.log(availableBooks);
         
-        const rawPrice = objBook.price.replace('€', ''); 
+        const rawPrice = parseFloat(objBook.price.replace('€', '')); 
         const price = Number(rawPrice);
-        const discounted = price * 0.8;
+        const discounted = (price * .8).toFixed(2);
 
         discountedBooks.push(discounted); 
         console.log(discountedBooks);
@@ -102,7 +104,23 @@ for(let i = 0; i<discountedBooks.length; i++){
     }
 }
 
+const availableBooks2 = books.filter(b => b.available)
+const discountedBooks2 = availableBooks2.map(ab => {
+    const price = parseFloat(ab.price.replace('€', '')); 
+    const discounted = (price * .8).toFixed(2);
+    return{
+        ...ab,
+        price: `${discounted}€`
+    }
+})
+console.log(discountedBooks2);
+
+const fullPricedBook2 = discountedBooks2.find(ds => {
+    const price = parseFloat(ds.price.replace('€', '')); 
+    return Number.isInteger(price);
+})
     
+console.log(fullPricedBook2);
 
 // Creare un array (authors) che contiene gli autori dei libri.
 // Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
@@ -139,6 +157,12 @@ if (areAuthorsAdults) {
 console.log(authors); 
 console.log("Tutti maggiorenni?", areAuthorsAdults);
 
+const author2 = books.map(b => b.author);
+console.log(author2);
+
+const areAuthorsAdults2 = author2.every(a => a.age > 18);
+author2.sort((a,b)=> (a.age-b.age) * (areAuthorsAdults2 ? 1 : -1))
+console.log(author2);
 
 // Creare un array (ages) che contiene le età degli autori dei libri.
 // Calcola la somma delle età (agesSum) usando reduce.
@@ -152,8 +176,10 @@ for (let i = 0; i<books.length; i++){
     console.log(ages);
     
 }
-
-const somma = ages.reduce((acc, curr)=>{
-    return acc+curr
+const ages2 = books.map(b => b.author.age)
+const somma = ages2.reduce((acc, age)=>{
+    return acc + age
 },0)
 console.log(somma);
+
+console.log(`L'età media è ${somma / ages.length}`)
